@@ -1,0 +1,260 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="assets/libraries/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/libraries/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="assets/libraries/bootstrap/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="assets/utilities.js"></script>
+    <script type="text/javascript" src="assets/factories.js"></script>
+    <script type="text/javascript" src="assets/client.js"></script>
+    <script type="text/javascript" src="assets/chart.js"></script>
+    <script type="text/javascript" src="assets/interpreter.js"></script>
+    <script type="text/javascript" src="assets/ui.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+<div class="container">
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark pv-menu">
+        <ul class="nav navbar-nav mr-auto" id="nav-tab" role="tablist">
+            <li class="nav-item">
+                <button id="info-tab" class="btn btn-secondary" type="button" data-toggle="tab" href="#info" role="tab"
+                        aria-controls="info" aria-selected="true"></button>
+            </li>
+            <li class="nav-item">
+                <button id="database-tab" class="btn btn-secondary" type="button" data-toggle="tab" href="#database"
+                        role="tab" aria-controls="database" aria-selected="false"></button>
+            </li>
+            <li class="nav-item">
+                <button id="chart-tab" class="btn btn-secondary" type="button" data-toggle="tab" href="#chart"
+                        role="tab" aria-controls="chart" aria-selected="false"></button>
+            </li>
+            <li class="nav-item">
+                <button id="logs-tab" class="btn btn-secondary" type="button" data-toggle="tab" href="#logs" role="tab"
+                        aria-controls="logs" aria-selected="false"></button>
+            </li>
+        </ul>
+        <button id="caution-offline" class="btn btn-danger d-none" data-html="true" data-toggle="tooltip"
+                title="Backend is offline.</br><span class='small'>Data cannot be retrieved.</span>"></button>
+    </nav>
+
+    <!-- content -->
+
+    <div class="tab-content" id="nav-tabContent">
+
+        <!-- info tab -->
+
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <div class="card">
+                <div class="card-header">
+                    Information
+                </div>
+                <div id="information-tab-body" class="card-body">
+                    <div class="row">
+                        <!-- GENERATE CONTENT -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- database tab -->
+
+        <div class="tab-pane fade" id="database" role="tabpanel" aria-labelledby="database-tab">
+            <div class="card">
+                <div class="card-header">
+                    Database
+                </div>
+                <div id="database-tab-body" class="card-body">
+                    <div id="query-options" class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="alert alert-warning" role="alert" style="display: none;">
+                                        <span> </span>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <span data-toggle="tooltip" title="The method of reducing arrays.">Reduce:</span>
+                                    <div class="form-group custom-control-inline">
+                                        <select class="form-control-sm" id="reduce-type">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <span data-toggle="tooltip">Time precision:</span>
+                                    <div class="form-group custom-control-inline">
+                                        <select class="form-control-sm" id="time-precision">
+                                            <option data-symbol='m'>Minutes</option>
+                                            <option data-symbol='s'>Seconds</option>
+                                            <option selected data-symbol='ms'>Milliseconds</option>
+                                            <option data-symbol='u'>Microseconds</option>
+                                            <option data-symbol='ns'>Nanoseconds</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="options-group col-auto">
+                                    <span data-toggle="tooltip" title="The method of reducing arrays.">View type:</span>
+                                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="radio" name="view-type" id="option1" autocomplete="off"
+                                                   data-value="Tracking" checked>
+                                            Tracking
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="view-type" id="option2" autocomplete="off"
+                                                   data-value="Summary"> Summary
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <button id="fetch-data" type="button" class="btn btn-outline-dark float-right">
+                                        Fetch data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Scheme <span id="show-hide-scheme" class="float-right">Show/Hide</span>
+                        </div>
+                        <div id="scheme-selectors" class="card-body">
+                            <div class="row">
+                                <div class="scheme-group col-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="title">Databases</div>
+                                    <input type="text" class="form-control search input-sm" placeholder="Search"/>
+                                    <div id="databases-list" class="list-group select-one"
+                                         data-dependents='["measurements", "tags", "tag-vals"]'>
+                                        <!-- GENERATE CONTENT -->
+                                    </div>
+                                </div>
+                                <div class="scheme-group col-6 col-sm-4 col-md-3 col-lg-2 " style="display: none;">
+                                    <div class="title">Measurement</div>
+                                    <input type="text" class="form-control search" placeholder="Search"/>
+                                    <div id="measurements-list" class="list-group select-one"
+                                         data-dependents='["tags", "tag-vals"]'>
+                                        <!-- GENERATE CONTENT -->
+                                    </div>
+                                </div>
+                                <div class="scheme-group col-6 col-sm-4 col-md-3 col-lg-2" style="display: none;">
+                                    <div class="title">Tags</div>
+                                    <input type="text" class="form-control search" placeholder="Search"/>
+                                    <div id="tags-list" class="list-group select-multiple"
+                                         data-dependents='["tag-vals"]'>
+                                        <!-- GENERATE CONTENT -->
+                                    </div>
+                                </div>
+                                <div class="scheme-group col-6 col-sm-4 col-md-3 col-lg-2" style="display: none;">
+                                    <div class="title">Tag values</div>
+                                    <input type="text" class="form-control search" placeholder="Search"/>
+                                    <div id="tag-vals-list" class="list-group select-multiple" data-parent="tags">
+                                        <!-- GENERATE CONTENT -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- chart tab -->
+
+        <div class="tab-pane fade" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+            <div class="card">
+                <div class="card-header">
+                    Chart
+                </div>
+                <div id="chart-options" class="row  no-gutters card-body">
+                    <div class="col-sm-3 col-lg-2 chart-options-group ">
+                        <span>Chart size</span>
+                        <table style="width: 100%">
+                            <tr>
+                                <td>Width:</td>
+                                <td class="text-right">
+                                    <input name="width" class="chart-option" type="number" min="500" value="0">
+                                </td>
+                            </tr>
+                            <tr class="mn-b-5">
+                                <td>Height:</td>
+                                <td class="text-right">
+                                    <input name="height" class="chart-option" type="number" min="500" value="0">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-3 col-lg-2 chart-options-group ">
+                        <span>Chart layout</span>
+                        <table style="width: 100%">
+                            <tr>
+                                <td>Show legend:</td>
+                                <td class="text-right">
+                                    <input name="showlegend" class="chart-option" type="checkbox" checkable>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Range slider:</td>
+                                <td class="text-right"><input name="rangeslider" class="chart-option" type="checkbox">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ticks:</td>
+                                <td class="text-right"><input name="ytick" class="chart-option" type="checkbox"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="chart-options-group col-sm-2 col-lg-2">
+                        <span>Chart type</span>
+                        <form name="chartType" class="chart-option">
+                            <input name="chartType" type="radio" value="scatter" checked>Scatter<br>
+                            <input name="chartType" type="radio" value="dots">Dots<br>
+                            <input name="chartType" type="radio" value="bar">Bar<br>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-dark float-right mt-1 mr-5 w-50" id="save-options">Set</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- logs tab -->
+
+        <div class="tab-pane fade" id="logs" role="tabpanel" aria-labelledby="logs-tab">
+            <div class="card">
+                <div class="card-header">
+                    Logs
+                </div>
+                <div id="log-div" class="card-body">
+                    <ul id="logs-list" class="list-group">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chart -->
+
+    <div id="chart-panel" class="card">
+        <div class="card-header">
+            Chart
+        </div>
+        <div class="card-body">
+            <div id="chart-1">
+                <div class="col-12">
+                    <div id="mainChart">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of content -->
+</div>
+</body>
+</html>

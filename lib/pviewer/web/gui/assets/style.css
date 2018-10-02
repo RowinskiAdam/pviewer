@@ -1,0 +1,259 @@
+/* TOP MENU */
+
+.pv-menu li {
+    margin: 0 5px 0 5px;
+}
+
+.pv-menu button {
+    width: 50px;
+    height: 50px;
+}
+
+button#database-tab {
+    background: #393f44 url('icons/database.png') no-repeat center;
+}
+
+button#chart-tab {
+    background: #393f44 url('icons/chart.png') no-repeat center;
+}
+
+button#logs-tab {
+    background: #393f44 url('icons/log.png') no-repeat center;
+}
+
+button#info-tab {
+    background: #393f44 url('icons/info.png') no-repeat center;
+}
+
+button#power-off {
+    background: #393f44 url('icons/off.png') no-repeat center;
+}
+
+button#caution-offline {
+    background: #393f44 url('icons/caution.png') no-repeat center;
+}
+
+/* CONTENT */
+
+.tab-pane > .card {
+    border-top: none;
+    border-radius: 0;
+    border-color: #343a40;
+}
+
+.card-header {
+    border-radius: 0;
+    padding: 2px 10px 2px 10px;
+    background-color: #393f45;
+}
+
+.card-header:first-child {
+    color: White;
+    border-radius: 0;
+}
+
+.card-body {
+    font-size: 14px;
+}
+
+/* INFO CONTENT */
+
+#information-tab-body .title {
+    font-size: 100%;
+    font-weight: bold;
+}
+
+#information-tab-body .col {
+    margin-bottom: 4px;
+}
+
+/* DATABASE CONTENT */
+
+.disabled-button {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+#database-tab-body > .card {
+    margin-bottom: 10px;
+}
+
+#database-tab-body .list-group-item {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.scheme-group .search {
+    background-color: #eeeeee;
+    text-align: center;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    height: 30px;
+}
+
+.scheme-group .search:focus {
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.scheme-group .search::placeholder {
+    color: #ffab3f;
+}
+
+#database-tab-body .title {
+    text-align: center;
+    border-top: 1px gray solid;
+    border-bottom: 1px gray solid;
+    margin-bottom: 3px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.list-group {
+    border-bottom: 1px solid #cccccc;
+    border-radius: 0 0 5px 5px;
+    max-height: 200px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.list-group .selected {
+    background-color: #4f575f;
+    border-color: #393f44;
+    color: white;
+}
+
+.list-group .active {
+    background-color: #343a40;
+    border-color: #393f44;
+    color: white;
+}
+
+.list-group::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+.list-group::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+.list-group::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 2px solid #555555;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+#query-re-fetch {
+    width: 40px;
+}
+
+#query-time {
+    width: 180px;
+}
+
+#query-options input {
+    margin-left: 8px;
+}
+
+input[type=number] {
+    padding-right: 2px;
+    text-align: right;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+#show-hide-scheme {
+    cursor: pointer;
+}
+
+#show-hide-scheme:hover {
+    color: #ffab3f;
+}
+
+/* LOG CONTENT */
+
+#logs-list .list-group-item {
+    padding: 2px 10px 2px 10px;
+}
+
+#log-list .list-group-item span {
+    color: blue;
+}
+
+.timestamp {
+    font-size: 85%;
+    margin-right: 10px;
+}
+
+/* CHART CONTENT */
+
+
+.chart-options-group {
+    border: 1px solid lightgray;
+    padding: 8px 4px 8px 4px !important;
+    text-align: center;
+    margin: 2px 0 2px 5px
+}
+
+.chart-options-group table {
+    color: dimgray;
+    font-size: 95%;
+    padding: 3px;
+}
+
+input[type="radio"],
+table td {
+    vertical-align: middle;
+}
+
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+.chart-options-group > form {
+    border: 1px inset lightgray;
+    margin: 2px;
+    text-align: left;
+    padding: 8px;
+    font-size: 94%;
+}
+
+.chart-option[type=number] {
+    width: 40px;
+}
+
+#chart .card-body {
+    padding: 10px;
+}
+
+#chart-panel {
+    margin: 20px 0 100px 0;
+}
+
+#chart-panel .card-header {
+    padding: 10px 10px 10px 10px;
+}
+
+#query-options .form-control-sm {
+    margin-left: 15px;
+}
+
+#query-options .btn-group {
+    margin-left: 15px;
+}

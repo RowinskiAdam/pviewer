@@ -1,0 +1,5 @@
+---
+test_database:
+  test_measurement [counters]: 'First experiment with simple model. Routes: 3'
+  test_measurement [durations]: 'First experiment with simple model. Routes: 3'
+  test_measurement [values]: 'First experiment with simple model. Routes: 3'
